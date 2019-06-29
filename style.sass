@@ -1,0 +1,190 @@
+*
+    position: relative
+
+html, body
+    height: 100%
+    width: 100%
+    margin: 0
+    padding: 0
+    overflow: hidden
+    // background-color: #f24
+html
+    font-family: 'Open Sans', sans-serif
+img
+    // border: solid 2px black
+    position: absolute
+    left: -1%
+    top: 0%
+    height: 100vh
+    opacity: 0.5
+    z-index: -1
+
+
+// colors
+$bg-color: #fdfdfc;
+$skin-color: #4b96ca;
+$primary-color: #1f2033;
+
+// mixins
+@mixin center 
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+    margin: auto
+
+@mixin pseudo($position: absolute, $content: "") 
+    content: $content
+    position: $position
+
+
+@mixin square($width,$height,$background) 
+    width: $width
+    height: $height
+    background: $background
+
+
+//人物
+
+.head
+    animation-name: up-down
+    animation-duration: 1s
+    animation-timing-function: ease-in-out
+    animation-iteration-count: infinite
+    z-index: 10
+    // +center 
+    +square(30vmin,30vmin,#f24)
+    //overflow: hidden
+    // position: absolute
+    position: relative
+    // top: 20%
+    left: 80%
+    border-radius: 50%
+    background: #FF6B6B
+    // border: solid 2px black
+
+    .eyes-one, .eyes-two
+        +center
+        +square(10vmin,10vmin,white)
+        border-radius: 50%
+        overflow: auto
+        position: absolute
+    .eyes-one
+        animation-name: bounce
+        animation-duration: 1.4s
+        animation-timing-function: ease-in-out
+        animation-iteration-count: infinite
+        top: -9.5vmin
+        left: 0vmin
+        &:before
+            content: ""
+            position: absolute
+            +square(5vmin,5vmin,$primary-color)
+            top: 1.8vmin
+            left: 0.9vmin
+            border-radius: 50%
+    .eyes-two
+        animation-name: bounce
+        animation-duration: 1.4s
+        animation-timing-function: ease-in-out
+        animation-iteration-count: infinite
+        top: -9.5vmin
+        left: -20vmin
+        &:before
+            content: ""
+            position: absolute
+            +square(5vmin,5vmin,$primary-color)
+            top: 1.8vmin
+            left: 3.9vmin
+            border-radius: 50%
+    .smile
+        animation-name: bounces
+        animation-duration: 1.4s
+        animation-timing-function: ease-in-out
+        animation-iteration-count: infinite
+        +center
+        +square(8vmin,2vmin,none)
+        left: -10vmin
+        top: 11.8vmin
+        border-bottom: 1vmin solid black
+        border-left: 1vmin solid black
+        border-right: 1vmin solid black
+        border-radius: 0 0 15vmin 15vmin
+
+@keyframes up-down
+  0%
+    top: 30vmin
+  25%
+    top: 28vmin
+  50%
+    top: 30vmin
+  75%
+    top: 28vmin
+  100%
+    top: 30vmin
+
+
+@keyframes bounce
+  0%
+    top: -2vmin
+  25%
+    top: -4vmin
+  50%
+    top: -2vmin
+  75%
+    top: -4vmin
+  100%
+    top: -2vmin
+
+
+@keyframes bounces
+  0%
+    top: 12vmin
+  25%
+    top: 10vmin
+  50%
+    top: 12vmin
+  75%
+    top: 10vmin
+  100%
+    top: 12vmin
+
+
+//跑馬燈
+
+.container 
+    width: 50em
+    padding: 0.5em 0
+    // margin: 1em auto
+    position: absolute
+    top: 40%
+    left: 30%
+    background: #1A535C
+    border-radius: 0.5em
+    box-shadow: 0 0 2em 0.5em rgba(0,0,0,0.25)
+    overflow: hidden
+    background: #214a57
+    z-index: 10
+
+
+.block 
+    display: inline-block
+    margin: 1em 0
+    padding-left: 100% // Key is padding-left 100%
+    color: #FFF
+    font-size: 1.5em
+    font-weight: bold
+    white-space: nowrap
+    transform: translate(0,0)
+
+
+@keyframes marquee 
+    from { transform: translate(0,0) }
+    to { transform: translate(-100%,0) }
+
+
+.animate 
+    animation: marquee 12s linear 1s infinite
+    &.quick { animation-duration: 6s }
+
